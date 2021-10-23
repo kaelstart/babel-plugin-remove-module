@@ -1,19 +1,23 @@
 {
   "name": "babel-plugin-remove-module",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaelstart/babel-plugin-remove-module.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "kaelcoco <657075528@qq.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kaelstart/babel-plugin-remove-module/issues"
   },
-  "homepage": "https://github.com/kaelstart/babel-plugin-remove-module#readme"
+  "homepage": "https://github.com/kaelstart/babel-plugin-remove-module#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "jest": "27"
+  }
 }

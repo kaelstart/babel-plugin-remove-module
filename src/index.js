@@ -1,10 +1,3 @@
-/**
- *
- * @param {Object} path  当前ast节点信息
- * @param {Object} data  ast节点中的某部分数据
- * @param {Boolean} removeParent  // 是否删除父节点
- * @param {String} currentEnv 当前环境
- */
 const handleRemove = ({ path, data, removeParent = false, currentEnv }) => {
   const index = data.findIndex((item) => Array.isArray(item.leadingComments));
   if (index > -1) {
@@ -44,7 +37,7 @@ module.exports = function ({ types: t }, { currentEnv = "dev" }) {
         handleRemove({
           path,
           data: path.node.properties,
-          removeParent: t.isVariableDeclarator(path.parentPath), // 如果父节点直接是变量声明,则直接删除父节点.
+          removeParent: t.isVariableDeclarator(path.parentPath), 
           currentEnv,
         });
       },
