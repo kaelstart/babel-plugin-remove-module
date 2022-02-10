@@ -3,7 +3,10 @@ const handleRemove = ({ path, data, removeParent = false, currentEnv }) => {
   if (index > -1) {
     const reg = /\s{0,}environment\s{0,}:\s{0,}['|"](.*)['|"]\s{0,}/;
     const [leadingComments] = data[index].leadingComments;
-    const matchList = leadingComments?.value?.match(reg);
+    const matchList =
+      leadingComments &&
+      leadingComments.value &&
+      leadingComments.value.match(reg);
     if (matchList) {
       const [originValue, matchValue] = matchList;
       const envList = matchValue.split("|");
@@ -37,7 +40,7 @@ module.exports = function ({ types: t }, { currentEnv = "dev" }) {
         handleRemove({
           path,
           data: path.node.properties,
-          removeParent: t.isVariableDeclarator(path.parentPath), 
+          removeParent: t.isVariableDeclarator(path.parentPath),
           currentEnv,
         });
       },
