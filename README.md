@@ -1,34 +1,56 @@
 # babel-plugin-remove-module
 
-一个可以根据当前运行环境移除当前环境之外的babel插件.场景:例如有些代码只存在于开发环境,而不发布到测试环境.或者只存在于开发和测试环境,而不发布到生产环境
+Babel plugin helps can remove not match environment code.
 
 ## Installation
 
 ```sh
-$ npm install babel-plugin-remove-module
+npm install babel-plugin-remove-module -D
 ```
 
-## Usage
 
-**.babelrc**
+or
 
-```javascript
+```bash
+yarn add babel-plugin-remove-module -D
+```
+
+## options
+
+### currentEnv
+
+The option add currentEnv that can help you set the current run environment.
+
+**Default**: "" `(Required)`
+
+````javascript
+// .babel.config.js
 {
   "plugins": ["babel-plugin-remove-module",{
-      // 假设本地的环境变量有这些 ['dev','test','staging','prod']
-      currentEnv: process.env.CURRENT_ENV // 假设你的项目中是用CURRENT_ENV作为环境变量.
+      currentEnv: ''
+  }]
+}
+````
+
+## Example
+
+```js
+{
+  "plugins": ["babel-plugin-remove-module",{
+      currentEnv: 'test'
   }]
 }
 ```
 
-
 ```javascript
-// 如果当前的currentEnv === 'dev',那么此时下面的c2和c3模块会被移除掉.
-import(/* environment: "dev" */ "@/component/c1")
-import(/* environment: "test" */ "@/component/c2")
-import(/* environment: "uat" */ "@/component/c3")
-import(/* environment: "dev|uat" */ "@/component/c3") // 多条件并存的情况.
-import(/* environment: "dev|uat|prod" */ "@/component/c3") // 多条件并存的情况.
+import(/* environment: "dev" */ "@/component/c1"); // will be remove
+import(/* environment: "dev|test" */ "@/component/c2");
+import(/* environment: "uat" */ "@/component/c3"); // will be remove
 ```
 
+origin:
+![images](https://i.bmp.ovh/imgs/2022/05/31/45fb110468ea4feb.png)
 
+To:
+
+![images](https://i.bmp.ovh/imgs/2022/05/31/ce4ca9febf446a71.png)
